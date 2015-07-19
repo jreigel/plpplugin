@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<!-- ASM editor-->
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="plp_plugin.asm_editor.ASMEditor"
+            default="false"
+            extensions="asm"
+            icon="icons/asmIcon.gif"
+            id="PluginUI1.ASMEditor"
+            name="ASM Editor">
+      </editor>
+   </extension>
+   <!-- Syntax highlighting preferences for asm files-->
+      <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="plp_plugin.preferences.PLPPreferences"
+            class="plp_plugin.preferences.HighlightingPreferences"
+            id="plp_plugin.preferences.HighlightingPreferences"
+            name="Syntax Color">
+      </page>
+      <page
+            class="plp_plugin.preferences.PLPPreferences"
+            id="plp_plugin.preferences.PLPPreferences"
+            name="PLP">
+      </page>
+   </extension>
+   
+   <!-- Runtime preference, uses PreferenceInitializer for color prefernces-->
+      <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="plp_plugin.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   
+   <!-- Views to simulate PLPTool processes-->
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="plp_plugin.views.DisassemblyViewPart"
+            icon="icons/toolbar_cpu.png"
+            id="PluginUI1.disassemblyview"
+            name="Disassembly"
+            restorable="true">
+      </view>
+      <view
+            class="plp_plugin.views.WatcherViewPart"
+            icon="icons/toolbar_watcher.png"
+            id="PluginUI1.watcherview"
+            name="Watcher"
+            restorable="true">
+      </view>
+      <view
+            class="plp_plugin.views.IOPanelView"
+            icon="icons/IOIcon.png"
+            id="PluginUI1.iopanel"
+            name="IO Panel"
+            restorable="true">
+      </view>
+      <view
+            class="plp_plugin.views.UARTView"
+            icon="icons/toolbar_sim_uart.png"
+            id="PluginUI1.uartview"
+            name="UART"
+            restorable="true">
+      </view>
+     
+      <view
+            class="plp_plugin.views.memoryViewPart"
+            icon="icons/memIcon.png"
+            id="PluginUI1.memoryview"
+            name="Memory"
+            restorable="true">
+      </view> <view
+            class="plp_plugin.views.registersViewPart"
+            icon="icons/registerIcon.png"
+            id="PluginUI1.registersview"
+            name="Registers"
+            restorable="true">
+      </view>>
+   </extension>
+   
+   <!-- Debugger-->
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="plp_plugin.launcher.PLPLaunchDelegate"
+            id="PluginUI1.plpLaunchConfigurationType"
+            modes="run"
+            name="PLP Launch">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="plp_plugin.launcher.PLPconfigTabGroup"
+            id="PluginUI1.plpLaunchConfigurationTabGroup"
+            type="PluginUI1.plpLaunchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+   
+   <!-- Commands (needed with handlers)-->
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="PluginUI1.commands.category"
+            name="PLP Category">
+      </category>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.showDisassembly"
+            name="Show Disassembly">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.showWatcher"
+            name="Show Watcher">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.showIOPanel"
+            name="Show IO Panel">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.showUART"
+            name="Show UART">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.showVGA"
+            name="Show VGA">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.showPLPID"
+            name="Show PLPID">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.showGPIO"
+            name="Show GPIO">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.reportBug"
+            name="Report bug">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.plpManual"
+            name="Online Manual">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.showRegisters"
+            name="Show Registers">
+      </command>
+      <command
+            categoryId="PluginUI1.commands.category"
+            id="PluginUI1.commands.stepHandler"
+            name="Step Handler">
+      </command>
+   </extension>
+   
+   <!-- Handle events from toolbar, menus, key bindings, etc.. Require commands-->
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="plp_plugin.handlers.StepHandler"
+            commandId="PluginUI1.commands.stepHandler">
+      </handler>
+       <handler
+            class="plp_plugin.handlers.ShowDisassembly"
+            commandId="PluginUI1.commands.showDisassembly">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.ShowWatcher"
+            commandId="PluginUI1.commands.showWatcher">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.ShowIOPanel"
+            commandId="PluginUI1.commands.showIOPanel">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.ShowUART"
+            commandId="PluginUI1.commands.showUART">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.ShowVGA"
+            commandId="PluginUI1.commands.showVGA">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.ShowPLPID"
+            commandId="PluginUI1.commands.showPLPID">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.ShowGPIO"
+            commandId="PluginUI1.commands.showGPIO">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.PlpManual"
+            commandId="PluginUI1.commands.plpManual">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.ReportBug"
+            commandId="PluginUI1.commands.reportBug">
+      </handler>
+      <handler
+            class="plp_plugin.handlers.ShowRegisters"
+            commandId="PluginUI1.commands.showRegisters">
+      </handler>
+   </extension>
+   
+   <!-- Key bindings-->
+   <extension
+         point="org.eclipse.ui.bindings">
+            <key
+            commandId="PluginUI1.commands.showDisassembly"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+C">
+      </key>
+      <key
+            commandId="PluginUI1.commands.showWatcher"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+W">
+      </key>
+      <key
+            commandId="PluginUI1.commands.showIOPanel"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+I">
+      </key>
+      <key
+            commandId="PluginUI1.commands.showUART"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+4">
+      </key>
+      <key
+            commandId="PluginUI1.commands.showVGA"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+5">
+      </key>
+      <key
+            commandId="PluginUI1.commands.showPLPID"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+6">
+      </key>
+      <key
+            commandId="PluginUI1.commands.showGPIO"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+7">
+      </key>
+      <key
+            commandId="PluginUI1.commands.showRegisters"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+8">
+      </key>
+   </extension>
+   
+   <!-- Menu items for PLP Menu-->
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="PluginUI1.menus.sampleMenu"
+               label="PLP Menu"
+               mnemonic="M">
+             <command
+                  commandId="PluginUI1.commands.showDisassembly"
+                  icon="icons/toolbar_cpu.png"
+                  id="PluginUI1.menus.showDisassembly"
+                  mnemonic="T">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showWatcher"
+                  icon="icons/toolbar_watcher.png"
+                  id="PluginUI1.menus.showWatcher">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showIOPanel"
+                  icon="icons/IOIcon.png"
+                  id="PluginUI1.menus.showIOPanel">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showUART"
+                  icon="icons/terminal.ico"
+                  id="PluginUI1.menus.showUART"
+                  mnemonic="S">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showVGA"
+                  icon="icons/toolbar_sim_vga.png"
+                  id="PluginUI1.menus.showVGA">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showPLPID"
+                  icon="icons/toolbar_sim_plpid.png"
+                  id="PluginUI1.menus.showPLPID">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showGPIO"
+                  icon="icons/toolbar_sim_gpio.png"
+                  id="PluginUI1.menus.showGLPIO">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showRegisters"
+                  icon="icons/registerIcon.png"
+                  id="PluginUI1.menus.showRegisters">
+            </command>
+         </menu>
+      </menuContribution>
+      
+      <!-- Toolbar items-->
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="PluginUI1.toolbars.sampleToolbar"
+               label="PLP Toolbar">
+            <command
+                  commandId="PluginUI1.commands.stepHandler"
+                  icon="icons/toolbar_step.png"
+                  id="PluginUI1.toolbars.stepHandler"
+                  tooltip="Step">
+            </command>
+             <command
+                  commandId="PluginUI1.commands.showDisassembly"
+                  icon="icons/toolbar_cpu.png"
+                  id="PluginUI1.toolbars.showDisassembly"
+                  mnemonic="T">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showWatcher"
+                  icon="icons/toolbar_watcher.png"
+                  id="PluginUI1.toolbars.showWatcher">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showIOPanel"
+                  icon="icons/IOIcon.png"
+                  id="PluginUI1.toolbars.showIOPanel">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showUART"
+                  icon="icons/terminal.ico"
+                  id="PluginUI1.toolbars.showUART"
+                  mnemonic="S">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showVGA"
+                  icon="icons/toolbar_sim_vga.png"
+                  id="PluginUI1.toolbars.showVGA">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showPLPID"
+                  icon="icons/toolbar_sim_plpid.png"
+                  id="PluginUI1.toolbars.showPLPID">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showGPIO"
+                  icon="icons/toolbar_sim_gpio.png"
+                  id="PluginUI1.toolbars.showGLPIO">
+            </command>
+            <command
+                  commandId="PluginUI1.commands.showRegisters"
+                  icon="icons/registerIcon.png"
+                  id="PluginUI1.toolbars.showRegisters">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   
+   <!-- New Wizard for ASM files-->
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="plp_plugin"
+            name="PLP">
+      </category>
+      <wizard
+            category="plp_plugin"
+            class="plp_plugin.wizards.PLPNewWizard"
+            icon="icons/project.ico"
+            id="plp_plugin.wizards.SampleNewWizard"
+            name="ASM file">
+      </wizard>
+   </extension>
+
+</plugin>

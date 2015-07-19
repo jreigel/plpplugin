@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PluginUI1
+Bundle-SymbolicName: PluginUI1;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: plp_plugin.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.editors;bundle-version="3.8.200",
+ org.eclipse.jface.text;bundle-version="3.9.2",
+ org.eclipse.debug.core;bundle-version="3.9.1",
+ org.eclipse.debug.ui;bundle-version="3.10.2",
+ org.eclipse.jdt.launching;bundle-version="3.7.102",
+ org.eclipse.jdt.debug.ui;bundle-version="3.6.300",
+ org.eclipse.ui.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

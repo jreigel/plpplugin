@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="lib/absolutelayout/AbsoluteLayout.jar"/>
+	<classpathentry kind="lib" path="lib/commons-compress-1.1/commons-compress-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar"/>
+	<classpathentry kind="lib" path="lib/PLPThirdParty/collections-generic-4.01.jar"/>
+	<classpathentry kind="lib" path="lib/PLPThirdParty/jung-algorithms-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/PLPThirdParty/jung-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/PLPThirdParty/jung-graph-impl-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/PLPThirdParty/jung-visualization-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/PLPThirdParty/JXTextPane.jar"/>
+	<classpathentry kind="lib" path="lib/PLPThirdParty/PLPTimingDiagram.jar"/>
+	<classpathentry kind="lib" path="lib/PLPThirdParty/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="lib/swing-app-framework/appframework-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/swing-app-framework/swing-worker-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="lib/swingx-0.9.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
